@@ -1,0 +1,62 @@
+//sphere 1
+//create sphere
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+//scale to 5 units
+scale -relative 5 5 5;
+
+//sphere 2
+//duplicate
+duplicate -returnRootsOnly;
+//move up 7 units on the y axis
+move -relative 0 7 0;
+//scale down .8 units?
+scale -relative 0.8 0.8 0.8;
+
+//sphere 3
+duplicate -returnRootsOnly;
+move -relative 0 5.5 0;
+scale -relative 0.7 0.7 0.7;
+
+//hat
+//brim
+polyTorus -radius 1 -sectionRadius 0.5 -twist 0 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 1 -constructionHistory 1;
+move -relative 0 15.5 0;
+scale -relative 2 2 2;
+//chimney
+polyCylinder -radius 1 -height 2 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -rcp 0 -createUVs 3 -constructionHistory 1;
+move -relative 0 17 0;
+scale -relative 1.5 1.5 1.5;
+
+//nose
+polyCone -radius 1 -h 2 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 0 -axis 0 1 0 -roundCap 0 -createUVs 3 -ch 1;
+move -relative 0 12 0; 
+rotate -relative -objectSpace -forceOrderXYZ -87 0 0;
+move -relative 0 0 -3.3;
+//move cone tip
+select -replace pCone1.vtx[20];
+move -relative 0 0 -2;
+
+//eye 1 
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -1.2 13 -2.3; 
+scale -relative 0.6 0.6 0.6; 
+//sculpting 
+select -replace pSphere4.vtx[205];
+softSelect -softSelectDistance 0.5 -softSelectUVDistance 0.5;
+move -relative 0 0 0.3; 
+select -replace pSphere4.vtx[123];
+move -relative 0 0.2 1;
+
+//eye 2 
+select -replace pSphere4; 
+duplicate -returnRootsOnly;
+move -relative 2.6 -0.7 -0.3;
+scale -relative 0.7 0.7 0.7; 
+rotate -relative -objectSpace -forceOrderXYZ 0 0 75;
+
+//arms
+polyCube -width 1 -height 1 -depth 1 -subdivisionsX 1 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -createUVs 4 -constructionHistory 1;
+move -relative 0 8.5 0;
+scale -relative 14; 
+
+ 
