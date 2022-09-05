@@ -1,0 +1,25 @@
+//Exercise
+
+//Similar to the previous exercise, you will use MEL to create a model. However, for this exercise, you must create a dynamic script by utilizing variables and data types to store and retrieve data.  This practice is imperative for targeting objects and solving problems when scripting. Use this exercise to develop and demonstrate a solid understanding of how variables work within MEL.
+
+//Start from scratch and develop a new script for a model. You may build upon the demonstrated example or develop your own model, but the script must demonstrate individual thinking and problem-solving. Use variables to allow modification of the output when the script is run.
+
+//For example, variables could be used to:
+
+//change the size/position of the model.
+//modify the naming of objects
+//determine whether additional "accessory" objects are created
+//randomize anything!
+ 
+int $size;
+$size = 5;
+
+string $name;
+$name = "sphere";
+
+ polySphere -r $size;
+ rename $name;
+ rotate -r -os -fo $rotationFX 0 0;
+
+
+
