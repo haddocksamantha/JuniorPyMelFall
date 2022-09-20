@@ -1,0 +1,43 @@
+
+//int for transforms ++
+//int for number of stairs ++ 
+//rotation ++ 
+
+int $nofStairs = 0; 
+int $stairX = 1;
+int $stairY= 1;
+int $stairZ = 1;
+int $stairRotation; 
+float $moveX = -0.18;
+float $moveZ = -0.6; 
+
+int $i = 16;
+
+while($nofStairs < $i)
+{
+    polyCube -width 2 -name stair; 
+    $nofStairs++;
+    $stairX++; 
+    $stairY++;
+    $stairZ++;
+    $stairRotation += 25;
+    move -relative $stairX $stairY 0;
+    rotate -r -os -fo 0 $stairRotation 0;
+    $moveX += -2.2;
+    $moveZ += -0.2;
+    move -r $moveX 0 $moveZ; 
+
+}
+
+if($nofStairs = $i)
+{
+    print("script complete");
+}
+
+//merge stairs 
+select -r stair14 stair2 stair5 stair6 stair3 stair8 stair stair1 stair10 stair11 stair13 stair12 stair7 stair9 stair15 stair4;
+polyUnite -ch 1 -mergeUVSets 1 -centerPivot -name stair14 stair14 stair2 stair5 stair6 stair3 stair8 stair stair1 stair10 stair11 stair13 stair12 stair7 stair9 stair15 stair4;
+print("stairs merged");
+select -r stair16;
+DeleteHistory;
+
