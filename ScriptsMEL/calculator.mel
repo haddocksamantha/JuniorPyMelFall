@@ -1,0 +1,113 @@
+//Calculator:
+global proc int Divide(int $number1, int $number2)
+{
+    int $divResult = $number1 % $number2; 
+    return $divResult;
+}
+
+global proc int Add(int $number1, int $number2)
+{
+    int $addResult = ($number +$number2);
+    return $addResult;
+}
+
+global proc int Subtract(int $number1, int $number2)
+{
+    int $subResult = $number1 - $number2;
+    return $subResult; 
+}
+
+global proc int Multiply(int $number1, int $number2)
+{
+    int $mulResult = $number1 * $number2;
+    return $mulResult;
+}
+
+global proc Calculator(int $num2, int $num2, int $operation)
+{
+    if($operation = 1)
+    {
+        Divide($num1,$num2);
+        print("division = " + $divResult);
+    }
+    else if($operation = 2)
+    {
+        Add($num1,$num2);
+        print("addition = " + $addResult);
+
+    }
+    else if($operation == 3)
+    {
+        Subtract($num1,$num2);
+        print ("subtraction = " + $subResult);
+    }
+    else($operation == 4)
+    {
+        Multiply($num1,$num2);
+        print("multiplication = " + $mulResult);
+    }
+}
+Calculator(2,2,3);
+
+
+
+
+
+
+//practice and ref:
+
+//good
+//zodiac input return proc from lecture
+proc string ZodiacSigns(int $birthYear)
+{
+    string $signs[] = {"rat","ox","tiger","rabbit","dragon","snake","horse","sheep","monkey","rooster","dog","pig"};
+    int $index = ($birthYear - 4) % 12;
+
+    return $signs[$index];
+}
+//input year here
+print (ZodiacSigns(2000));
+
+
+
+//error
+//lottery numbers random function from lecture
+proc string LotteryNumbers()
+{
+    int $values[];
+    for (i = 0; i < 7; i++; )
+    {
+        $int num = `rand 100`;
+        $values [size($values)] = $num;
+    }
+
+    return (intArrayToString($values, "-"));
+}
+print (LotteryNumbers());
+
+//fine
+//random return function from lecture
+proc string ColorPick($favColor)
+{
+    string $colors[] = {"blue","green","red","yellow","orange","purple"};
+    int $size = size($colors);
+    int $randNum = `rand $size`;
+    //print ($colors[$randNum] + "\n");
+//returns the result 
+    return ($colors[$randNum]);
+}
+//assigns process to variable
+string $randColor = ColorPick();
+//prints the result
+print ($randColor);
+
+//make sure to specify data type and variable in proc
+proc string RandomNumber(int $num)
+{
+    int $randNum = `rand $num`;
+    return ($randNum);
+}
+
+print ("your fav color is" + ColorPick() + " and the number is" + RandomNumber(100) + "!/n");
+
+ColorPick("teal");
