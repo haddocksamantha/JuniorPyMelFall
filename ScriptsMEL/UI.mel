@@ -1,0 +1,91 @@
+
+//PRIMITIVE GENERATOR
+
+//call first and make global
+global proc createSphere()
+{
+    string $valueX = `optionVar -q "x"`;
+    string $valueY = `optionVar -q "y"`;
+    string $valueZ = `optionVar -q "z"`;
+
+    float $floatX = `floatField -q -value $valueX`;
+    float $floatY = `floatField -q -value $valueY`;
+    float $floatZ = `floatField -q -value $valueZ`;
+   polySphere -name uiSphere;
+   move -x $floatX -y $floatY -z $floatZ;
+}
+
+global proc createCube()
+{
+    string $valueX = `optionVar -q "x"`;
+    string $valueY = `optionVar -q "y"`;
+    string $valueZ = `optionVar -q "z"`;
+
+    float $floatX = `floatField -q -value $valueX`;
+    float $floatY = `floatField -q -value $valueY`;
+    float $floatZ = `floatField -q -value $valueZ`;
+   polyCube -name uiCube;
+   move -x $floatX -y $floatY -z $floatZ;
+}
+
+global proc createCylinder()
+{
+    string $valueX = `optionVar -q "x"`;
+    string $valueY = `optionVar -q "y"`;
+    string $valueZ = `optionVar -q "z"`;
+
+    float $floatX = `floatField -q -value $valueX`;
+    float $floatY = `floatField -q -value $valueY`;
+    float $floatZ = `floatField -q -value $valueZ`;
+   polyCylinder -name uiCylinder;
+   move -x $floatX -y $floatY -z $floatZ;
+}
+
+//name window and assign to variable
+string $window1 = "my_primitives_ui";
+
+//test if window exists and delete if true
+if(`window -exists $window1`)
+{
+    deleteUI $window1;
+}
+
+$window1 = `window 
+                 -height 100 
+                  -width 100 
+                  -title "Create Primitives"
+                  -sizeable 1 
+                  $window1`;
+string $column1 = `columnLayout 
+                      -adjustableColumn 1
+                     -parent $window1`;
+                     //float entry fields 
+                            string $xField = `floatField`;
+                            optionVar -stringValue "x" $xField;
+                            string $yField = `floatField`;
+                            optionVar -stringValue "y" $yField;
+                            string $zField = `floatField`;
+                            optionVar -stringValue "z" $zField;
+                    //buttons
+                            button  -label "Create PolySphere" 
+                            //no parentheses
+                                -command createSphere;
+                            button -label "Create PolyCube" 
+                                -command createCube;
+                            button -label "Create PolyCylinder" 
+                                -command createCylinder;
+                       
+showWindow $window1;
+
+//How to use: Input x,y,z, values respectfully in text fields. 
+//press the button of the primitives you want to create
+//alter values and create more as needed.
+
+
+
+//I decided to make a primitive generator instead because that's the use that came to mind that I did while following along with the lesson and it took me a lot of time. 
+//It is functionally similar to the calculator so I learned the same stuff pretty much. 
+//I can make the calculator as well if needed. 
+
+
+                
