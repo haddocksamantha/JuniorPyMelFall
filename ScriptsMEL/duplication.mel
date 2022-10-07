@@ -1,0 +1,78 @@
+//duplication
+
+//call first and make global
+global proc DuplicateRun()
+{
+    string $xMinValue = `optionVar -q "minX"`;
+    string $xMaxValue = `optionVar -q "maxX"`;
+    string $yMinValue = `optionVar -q "minY"`;
+    string $yMaxValue = `optionVar -q "maxY"`;
+    string $zMinValue = `optionVar -q "minZ"`;
+    string $zMaxValue = `optionVar -q "maxZ"`;
+
+    string $iValue = `optionVar -q "dupValue"`;
+
+    float $xMin = `floatField -q -value $xMinValue`;
+    float $xMax = `floatField -q -value $xMaxValue`;
+    float $yMin = `floatField -q -value $yMinValue`;
+    float $yMax = `floatField -q -value $yMaxValue`;
+    float $zMin = `floatField -q -value $zMinValue`;
+    float $zMax = `floatField -q -value $zMaxValue`;
+
+    int $i = `intField -q -value $iValue`;
+
+    //selects all dag objects 
+    select -ado;
+
+        float $iX = `rand $xMin $xMax`;
+        float $iY = `rand $yMin $yMax`;
+        float $iZ = `rand $zMin $zMax`;
+
+        duplicate;
+
+        move -a -x $iX -y $iY -z $iZ;
+}
+
+//name window and assign to variable
+string $window1 = "my_duplication_ui";
+
+//test if window exists and delete if true
+if(`window -exists $window1`)
+{
+    deleteUI $window1;
+}
+
+$window1 = `window 
+                 -height 100 
+                  -width 100 
+                  -title "Duplicate"
+                  -sizeable 1 
+                  $window1`;
+string $column1 = `columnLayout 
+                      -adjustableColumn 1
+                     -parent $window1`;
+                     //min and max float entry fields 
+                            string $minXField = `floatField`;
+                            optionVar -stringValue "minX" $minXField;
+                            string $maxXField = `floatField`;
+                            optionVar -stringValue "maxX" $maxXField;
+                            string $minYField = `floatField`;
+                            optionVar -stringValue "minY" $minYField;
+                            string $maxYField = `floatField`;
+                            optionVar -stringValue "maxY" $maxYField;
+                            string $minZField = `floatField`;
+                            optionVar -stringValue "minZ" $minZField; 
+                            string $maxZField = `floatField`;
+                            optionVar -stringValue "maxZ" $maxZField;        
+                    //buttons
+string $column2 = `columnLayout
+                        -adjustableColumn 1 
+                        -parent $window1`;
+                            button  -label "Duplicate Selected" 
+                            //no parentheses
+                                -command DuplicateRun;
+                            string $dupNum = `intField`;
+                            optionVar -stringValue "dupValue" $dupNum;    
+                       
+showWindow $window1;
+
