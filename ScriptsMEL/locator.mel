@@ -1,0 +1,24 @@
+/* This is a script to create a locator at the center position of the selected objects or elements. */
+
+//THIS WORKS WHEN SELECTING OBJECTS but NOT elements of an object
+
+//select; (select objects)
+group -n "locator_grp";
+CenterPivot;
+spaceLocator -p 0 0 0 -n "newLocator";
+select -add locator_grp;
+matchTransform -pos;
+select -r locator_grp;
+ungroup;
+select -r newLocator;
+group -n "locator_grp_01";
+
+//THIS WORKS WHEN SELECTING ELEMENTS 
+
+//select; (select elements)
+cluster -name "locatorCluster";
+spaceLocator -p 0 0 0 -n "newLocator";
+select -r newLocator locatorClusterHandle;
+matchTransform -pos;
+select -r locatorClusterHandle;
+delete;
